@@ -1,0 +1,14 @@
+{
+  "id": "{7AF35886-FB4A-D44E-118D-63B5794CED66}",
+  "name": "PowerSwitchByMeasurement",
+  "type": 3,
+  "vendor": "NTUB",
+  "url": "https://github.com/ubittner/PowerSwitchByMeasurement",
+  "aliases": [
+    "Power Switch By Measurement"
+  ],
+  "parentRequirements": [],
+  "childRequirements": [],
+  "implemented": [],
+  "prefix": "PSBM"
+}

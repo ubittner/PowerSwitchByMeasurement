@@ -1,0 +1,12 @@
+{
+  "id": "{F0FA04E5-E364-F2F8-AFFC-1AA5AC8F4229}",
+  "author": "Ulrich Bittner",
+  "name": "PowerSwitchByMeasurement",
+  "url": "https://github.com/ubittner/PowerSwitchByMeasurement",
+  "compatibility": {
+    "version": "5.3"
+  },
+  "version": "1.00",
+  "build": 2,
+  "date": 1587834000
+}

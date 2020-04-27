@@ -1,0 +1,551 @@
+{
+  "elements": [
+    {
+      "type": "ExpansionPanel",
+      "caption": "Instanzinformationen",
+      "items": [
+        {
+          "type": "Image",
+          "image": "data:image/png;base64,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"
+        },
+        {
+          "type": "Label",
+          "caption": "Ein Gemeinschaftsprojekt von Normen Thiel und Ulrich Bittner\n"
+        },
+        {
+          "type": "Label",
+          "caption": "Mit dieser Instanz kann ein Schaltaktor (HmIP-PSM, HmIP-FSM, HmIP-FSM16) auf Stromverbrauch überwacht und geschaltet werden.\nWeitere Informationen entnehmen Sie bitte der Dokumentation.\n"
+        },
+        {
+          "type": "Label",
+          "caption": "Symcon Version:\t5.3>"
+        },
+        {
+          "type": "Label",
+          "caption": "Name:\t\t\tPower Switch By Measurement"
+        },
+        {
+          "type": "Label",
+          "caption": "Version:\t\t\t1.00-2"
+        },
+        {
+          "type": "Label",
+          "caption": "Datum:\t\t\t25. April 2020"
+        },
+        {
+          "type": "Label",
+          "caption": "Uhrzeit:\t\t\t18:00"
+        },
+        {
+          "type": "Label",
+          "caption": "Entwickler:\t\tUlrich Bittner"
+        },
+        {
+          "type": "Label",
+          "caption": "Präfix:\t\t\tPSBM"
+        }
+      ]
+    },
+    {
+      "type": "ExpansionPanel",
+      "caption": "Allgemeine Optionen",
+      "items": [
+        {
+          "type": "ExpansionPanel",
+          "caption": "Schaltoptionen",
+          "items": [
+            {
+              "type": "CheckBox",
+              "name": "MaintenanceMode",
+              "caption": "Wartungsmodus"
+            },
+            {
+              "type": "CheckBox",
+              "name": "EnableSwitchingMode",
+              "caption": "Schaltzustand"
+            }
+          ]
+        },
+        {
+          "type": "ExpansionPanel",
+          "caption": "Statusinformationen",
+          "items": [
+            {
+              "type": "CheckBox",
+              "name": "EnableMonitoringMode",
+              "caption": "Überwachung"
+            },
+            {
+              "type": "CheckBox",
+              "name": "EnableCurrentConsumption",
+              "caption": "Aktueller Verbrauch"
+            },
+            {
+              "type": "CheckBox",
+              "name": "EnableEnergyCounter",
+              "caption": "Gesamtverbrauch"
+            },
+            {
+              "type": "CheckBox",
+              "name": "EnableThresholdValueOff",
+              "caption": "Schwellenwert Aus"
+            },
+            {
+              "type": "CheckBox",
+              "name": "EnableThresholdValueOn",
+              "caption": "Schwellenwert An"
+            },
+            {
+              "type": "CheckBox",
+              "name": "EnableNextNotification",
+              "caption": "Nächste Benachrichtigung"
+            },
+            {
+              "type": "CheckBox",
+              "name": "EnableNextSwitchOff",
+              "caption": "Nächste Ausschaltung"
+            }
+          ]
+        },
+        {
+          "type": "ExpansionPanel",
+          "caption": "Debug",
+          "items": [
+            {
+              "type": "CheckBox",
+              "name": "UseMessageSinkDebug",
+              "caption": "Registrierte Nachrichten"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExpansionPanel",
+      "caption": "Schaltaktor",
+      "items": [
+        {
+          "type": "Label",
+          "caption": "Bitte wählen Sie die Variable des zu schaltenden Aktors aus:\n\nHmIP-PSM\t\tKanal 3\t\tSTATE\nHmIP-FSM\t\tKanal 2\t\tSTATE\nHmIP-FSM16\tKanal 2\t\tSTATE"
+        },
+        {
+          "type": "SelectVariable",
+          "name": "SwitchingActuator",
+          "caption": "Schaltaktor"
+        }
+      ]
+    },
+    {
+      "type": "ExpansionPanel",
+      "caption": "Verbräuche",
+      "items": [
+        {
+          "type": "ExpansionPanel",
+          "caption": "Verbräuche",
+          "items": [
+            {
+              "type": "Label",
+              "caption": "Bitte wählen Sie die Variable für den aktuellen Verbrauch aus:\n\nHmIP-PSM\t\tKanal 6\t\tCURRENT\nHmIP-FSM\t\tKanal 5\t\tCURRENT\nHmIP-FSM16\tKanal 5\t\tCURRENT"
+            },
+            {
+              "type": "SelectVariable",
+              "name": "CurrentConsumption",
+              "caption": "Aktueller Verbrauch"
+            },
+            {
+              "type": "Label",
+              "caption": " "
+            },
+            {
+              "type": "Label",
+              "caption": "Bitte wählen Sie die Variable für den Gesamtverbrauch aus:\n\nHmIP-PSM\t\tKanal 6\t\tENERGY_COUNTER\nHmIP-FSM\t\tKanal 5\t\tENERGY_COUNTER\nHmIP-FSM16\tKanal 5\t\tENERGY_COUNTER"
+            },
+            {
+              "type": "SelectVariable",
+              "name": "EnergyCounter",
+              "caption": "Gesamtverbrauch"
+            }
+          ]
+        },
+        {
+          "type": "ExpansionPanel",
+          "caption": "Archivierung",
+          "items": [
+            {
+              "type": "Label",
+              "caption": "Bitte wählen Sie das Archiv zur Archivierung der Daten aus:"
+            },
+            {
+              "type": "SelectInstance",
+              "name": "Archive",
+              "caption": "Archiv"
+            },
+            {
+              "type": "Label",
+              "caption": " "
+            },
+            {
+              "type": "Label",
+              "caption": "Bitte wählen Sie aus, welche Daten archivert werden soll:"
+            },
+            {
+              "type": "CheckBox",
+              "name": "UseCurrentConsumptionArchiving",
+              "caption": "Aktueller Verbrauch"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExpansionPanel",
+      "caption": "Messung",
+      "items": [
+        {
+          "type": "ExpansionPanel",
+          "caption": "Grenzwerte",
+          "items": [
+            {
+              "type": "Label",
+              "caption": "Bitte geben Sie die Grenzwerte an:"
+            },
+            {
+              "type": "RowLayout",
+              "items": [
+                {
+                  "type": "ValidationTextBox",
+                  "name": "BelowMilliampere",
+                  "caption": "",
+                  "value": "<",
+                  "width": "10px",
+                  "enabled": false
+                },
+                {
+                  "type": "NumberSpinner",
+                  "name": "ThresholdValueSwitchingOff",
+                  "caption": "Aus",
+                  "suffix": " mA",
+                  "minimum": 0,
+                  "maximum": 160000
+                }
+              ]
+            },
+            {
+              "type": "RowLayout",
+              "items": [
+                {
+                  "type": "ValidationTextBox",
+                  "name": "AboveMilliampere",
+                  "caption": "",
+                  "value": ">",
+                  "width": "10px",
+                  "enabled": false
+                },
+                {
+                  "type": "NumberSpinner",
+                  "name": "ThresholdValueSwitchingOn",
+                  "caption": "An",
+                  "suffix": " mA",
+                  "minimum": 0,
+                  "maximum": 160000
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ExpansionPanel",
+          "caption": "Benachrichtigung",
+          "items": [
+            {
+              "type": "Label",
+              "caption": "Bitte wählen Sie die Instanz der Benachrichtigungszentrale aus:"
+            },
+            {
+              "type": "SelectInstance",
+              "name": "NotificationCenter",
+              "caption": "Benachrichtigungszentrale"
+            },
+            {
+              "type": "Label",
+              "caption": " "
+            },
+            {
+              "type": "Label",
+              "caption": "Bitte geben Sie den Zeitpunkt zur Benachrichtigung an, nach dem der Grenzwert Aus unterschritten wurde:"
+            },
+            {
+              "type": "RowLayout",
+              "items": [
+                {
+                  "type": "NumberSpinner",
+                  "name": "NotificationExpirationTime",
+                  "caption": "Ablaufzeit bis zur Benachrichtigung",
+                  "minimum": 0,
+                  "maximum": 1440
+                },
+                {
+                  "type": "Select",
+                  "name": "NotificationExpirationUnit",
+                  "caption": "Einheit",
+                  "options": [
+                    {
+                      "caption": "Sekunden",
+                      "value": 0
+                    },
+                    {
+                      "caption": "Minuten",
+                      "value": 1
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "Label",
+              "caption": " "
+            },
+            {
+              "type": "Label",
+              "caption": "Bitte geben Sie den Benachrichtigungstitel an:"
+            },
+            {
+              "type": "ValidationTextBox",
+              "name": "NotificationTitle",
+              "caption": "Benachrichtigungstitel"
+            },
+            {
+              "type": "Label",
+              "caption": " "
+            },
+            {
+              "type": "Label",
+              "caption": "Bitte geben Sie den Benachrichtigungstext an:"
+            },
+            {
+              "type": "ValidationTextBox",
+              "name": "NotificationText",
+              "caption": "Benachrichtigungstext",
+              "width": "608px"
+            }
+          ]
+        },
+        {
+          "type": "ExpansionPanel",
+          "caption": "Ausschaltung",
+          "items": [
+            {
+              "type": "CheckBox",
+              "name": "UseSwitchingOff",
+              "caption": "Ausschaltung verwenden"
+            },
+            {
+              "type": "Label",
+              "caption": " "
+            },
+            {
+              "type": "Label",
+              "caption": "Bitte geben Sie den Zeitpunkt zur Ausschaltung des Schaltaktors an, nach dem der Grenzwert Aus unterschritten wurde:"
+            },
+            {
+              "type": "RowLayout",
+              "items": [
+                {
+                  "type": "NumberSpinner",
+                  "name": "SwitchingOffExpirationTime",
+                  "caption": "Ablaufzeit bis zur Ausschaltung",
+                  "minimum": 0,
+                  "maximum": 1440
+                },
+                {
+                  "type": "Select",
+                  "name": "SwitchingOffExpirationUnit",
+                  "caption": "Einheit",
+                  "options": [
+                    {
+                      "caption": "Sekunden",
+                      "value": 0
+                    },
+                    {
+                      "caption": "Minuten",
+                      "value": 1
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExpansionPanel",
+      "caption": "Skriptausführung",
+      "items": [
+        {
+          "type": "Label",
+          "caption": "\nBitte wählen Sie das Skript aus, welches bei jedem Schaltvorgang ausgeführt werden soll:"
+        },
+        {
+          "type": "SelectScript",
+          "name": "Script",
+          "caption": "Skript"
+        },
+        {
+          "type": "Label",
+          "caption": "\nWird ein Skript verwendet, so wird der Modus und der aktuelle Verbrauch dem Skript übergeben:\n\n$_IPS['Mode']\n\n0\t= Aus\n1\t= Messung\n2\t= An\n\n$_IPS['CurrentConsumption']"
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "ExpansionPanel",
+      "caption": "Konfiguration",
+      "items": [
+        {
+          "type": "Button",
+          "caption": "Neu einlesen",
+          "onClick": "PSBM_ReloadConfiguration($id);"
+        },
+        {
+          "type": "RowLayout",
+          "items": [
+            {
+              "type": "SelectCategory",
+              "name": "BackupCategory",
+              "caption": "Kategorie"
+            },
+            {
+              "type": "Label",
+              "caption": " "
+            },
+            {
+              "type": "Button",
+              "caption": "Sichern",
+              "onClick": "PSBM_CreateBackup($id, $BackupCategory);"
+            }
+          ]
+        },
+        {
+          "type": "RowLayout",
+          "items": [
+            {
+              "type": "SelectScript",
+              "name": "ConfigurationScript",
+              "caption": "Konfigurationsskript"
+            },
+            {
+              "type": "Label",
+              "caption": " "
+            },
+            {
+              "type": "PopupButton",
+              "caption": "Wiederherstellen",
+              "popup": {
+                "caption": "Konfiguration wirklich wiederherstellen?",
+                "items": [
+                  {
+                    "type": "Button",
+                    "caption": "Wiederherstellen",
+                    "onClick": "PSBM_RestoreConfiguration($id, $ConfigurationScript);"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExpansionPanel",
+      "caption": "Registrierte Nachrichten",
+      "items": [
+        {
+          "type": "List",
+          "name": "RegisteredMessages",
+          "caption": "Registrierte Nachrichten",
+          "rowCount": 10,
+          "sort": {
+            "column": "Description",
+            "direction": "ascending"
+          },
+          "columns": [
+            {
+              "name": "Description",
+              "caption": "Bezeichnung",
+              "width": "350px"
+            },
+            {
+              "name": "SenderID",
+              "caption": "Sender ID",
+              "width": "110px"
+            },
+            {
+              "name": "SenderName",
+              "caption": "Sender Name",
+              "width": "250px"
+            },
+            {
+              "name": "MessageID",
+              "caption": "Nachrichten ID",
+              "width": "140px"
+            },
+            {
+              "name": "MessageDescription",
+              "caption": "Nachrichten Bezeichnung",
+              "width": "220px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExpansionPanel",
+      "caption": "Beispielskript",
+      "items": [
+        {
+          "type": "Button",
+          "caption": "Beispielskript erstellen",
+          "onClick": "PSBM_CreateScriptExample($id);"
+        }
+      ]
+    },
+    {
+      "type": "ExpansionPanel",
+      "caption": "Testbereich",
+      "items": [
+        {
+          "type": "TestCenter"
+        }
+      ]
+    }
+  ],
+  "status": [
+    {
+      "code": 101,
+      "icon": "active",
+      "caption": "Power Switch By Measurement wird erstellt"
+    },
+    {
+      "code": 102,
+      "icon": "active",
+      "caption": "Power Switch By Measurement ist aktiv"
+    },
+    {
+      "code": 103,
+      "icon": "active",
+      "caption": "Power Switch By Measurement wird gelöscht"
+    },
+    {
+      "code": 104,
+      "icon": "inactive",
+      "caption": "Power Switch By Measurement ist inaktiv"
+    },
+    {
+      "code": 200,
+      "icon": "inactive",
+      "caption": "Es ist Fehler aufgetreten, weitere Informationen unter Meldungen oder im Log"
+    }
+  ]
+}
