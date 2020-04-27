@@ -50,7 +50,6 @@ trait PSBM_notification
         $smsText = $title . ', ' . $text;
         $messageType = 0;
         @BENA_SendNotification($id, $pushTitle, $pushText, $emailSubject, $emailText, $smsText, $messageType);
-
     }
 
     /**
