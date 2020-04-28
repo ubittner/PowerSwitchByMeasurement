@@ -14,7 +14,7 @@
         },
         {
           "type": "Label",
-          "caption": "Mit dieser Instanz kann ein Schaltaktor (HmIP-PSM, HmIP-FSM, HmIP-FSM16) auf Stromverbrauch überwacht und geschaltet werden.\nWeitere Informationen entnehmen Sie bitte der Dokumentation.\n"
+          "caption": "Mit dieser Instanz kann ein Homematic IP Schaltaktor (HmIP-PSM, HmIP-FSM, HmIP-FSM16) auf Stromverbrauch überwacht und geschaltet werden.\nWeitere Informationen entnehmen Sie bitte der Dokumentation.\n"
         },
         {
           "type": "Label",
@@ -26,7 +26,7 @@
         },
         {
           "type": "Label",
-          "caption": "Version:\t\t\t1.00-6"
+          "caption": "Version:\t\t\t1.00-7"
         },
         {
           "type": "Label",
@@ -126,12 +126,13 @@
       "items": [
         {
           "type": "Label",
-          "caption": "Bitte wählen Sie die Variable des zu schaltenden Aktors aus:\n\nHmIP-PSM\t\tKanal 3\t\tSTATE\nHmIP-FSM\t\tKanal 2\t\tSTATE\nHmIP-FSM16\tKanal 2\t\tSTATE"
+          "caption": "Bitte wählen Sie die Variable des zu schaltenden Aktors aus:\n\nHmIP-PSM\t\tKanal 3\tSTATE\nHmIP-FSM\t\tKanal 2\tSTATE\nHmIP-FSM16\tKanal 2\tSTATE"
         },
         {
           "type": "SelectVariable",
           "name": "SwitchingActuator",
-          "caption": "Schaltaktor"
+          "caption": "Schaltaktor",
+          "width": "600px"
         }
       ]
     },
@@ -145,12 +146,13 @@
           "items": [
             {
               "type": "Label",
-              "caption": "Bitte wählen Sie die Variable für den aktuellen Verbrauch aus:\n\nHmIP-PSM\t\tKanal 6\t\tCURRENT\nHmIP-FSM\t\tKanal 5\t\tCURRENT\nHmIP-FSM16\tKanal 5\t\tCURRENT"
+              "caption": "Bitte wählen Sie die Variable für den aktuellen Verbrauch aus:\n\nHmIP-PSM\t\tKanal 6\tCURRENT\nHmIP-FSM\t\tKanal 5\tCURRENT\nHmIP-FSM16\tKanal 5\tCURRENT"
             },
             {
               "type": "SelectVariable",
               "name": "CurrentConsumption",
-              "caption": "Aktueller Verbrauch"
+              "caption": "Aktueller Verbrauch",
+              "width": "600px"
             },
             {
               "type": "Label",
@@ -158,12 +160,13 @@
             },
             {
               "type": "Label",
-              "caption": "Bitte wählen Sie die Variable für den Gesamtverbrauch aus:\n\nHmIP-PSM\t\tKanal 6\t\tENERGY_COUNTER\nHmIP-FSM\t\tKanal 5\t\tENERGY_COUNTER\nHmIP-FSM16\tKanal 5\t\tENERGY_COUNTER"
+              "caption": "Bitte wählen Sie die Variable für den Gesamtverbrauch aus:\n\nHmIP-PSM\t\tKanal 6\tENERGY_COUNTER\nHmIP-FSM\t\tKanal 5\tENERGY_COUNTER\nHmIP-FSM16\tKanal 5\tENERGY_COUNTER"
             },
             {
               "type": "SelectVariable",
               "name": "EnergyCounter",
-              "caption": "Gesamtverbrauch"
+              "caption": "Gesamtverbrauch",
+              "width": "600px"
             }
           ]
         },
@@ -178,7 +181,8 @@
             {
               "type": "SelectInstance",
               "name": "Archive",
-              "caption": "Archiv"
+              "caption": "Archiv",
+              "width": "600px"
             },
             {
               "type": "Label",
@@ -264,7 +268,8 @@
             {
               "type": "SelectInstance",
               "name": "NotificationCenter",
-              "caption": "Benachrichtigungszentrale"
+              "caption": "Benachrichtigungszentrale",
+              "width": "600px"
             },
             {
               "type": "Label",
@@ -312,7 +317,8 @@
             {
               "type": "ValidationTextBox",
               "name": "NotificationTitle",
-              "caption": "Benachrichtigungstitel"
+              "caption": "Benachrichtigungstitel",
+              "width": "384px"
             },
             {
               "type": "Label",
@@ -389,7 +395,8 @@
         {
           "type": "SelectScript",
           "name": "Script",
-          "caption": "Skript"
+          "caption": "Skript",
+          "width": "600px"
         },
         {
           "type": "Label",
@@ -414,7 +421,8 @@
             {
               "type": "SelectCategory",
               "name": "BackupCategory",
-              "caption": "Kategorie"
+              "caption": "Kategorie",
+              "width": "600px"
             },
             {
               "type": "Label",
@@ -433,7 +441,8 @@
             {
               "type": "SelectScript",
               "name": "ConfigurationScript",
-              "caption": "Konfigurationsskript"
+              "caption": "Konfigurationsskript",
+              "width": "600px"
             },
             {
               "type": "Label",
