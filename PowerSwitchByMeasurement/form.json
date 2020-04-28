@@ -26,7 +26,7 @@
         },
         {
           "type": "Label",
-          "caption": "Version:\t\t\t1.00-7"
+          "caption": "Version:\t\t\t1.00-8"
         },
         {
           "type": "Label",
@@ -196,6 +196,11 @@
               "type": "CheckBox",
               "name": "UseCurrentConsumptionArchiving",
               "caption": "Aktueller Verbrauch"
+            },
+            {
+              "type": "CheckBox",
+              "name": "UseEnergyCounterArchiving",
+              "caption": "Gesamtverbrauch"
             }
           ]
         }

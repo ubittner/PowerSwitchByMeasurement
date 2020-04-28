@@ -12,7 +12,7 @@
  * @license     CC BY-NC-SA 4.0
  *              https://creativecommons.org/licenses/by-nc-sa/4.0/
  *
- * @version     1.00-7
+ * @version     1.00-8
  * @date        2020-04-25, 18:00, 1587834000
  * @review      2020-04-25, 18:00
  *
@@ -182,6 +182,7 @@ class PowerSwitchByMeasurement extends IPSModule
         $this->RegisterPropertyInteger('EnergyCounter', 0);
         $this->RegisterPropertyInteger('Archive', 0);
         $this->RegisterPropertyBoolean('UseCurrentConsumptionArchiving', false);
+        $this->RegisterPropertyBoolean('UseEnergyCounterArchiving', false);
         // Measurement
         $this->RegisterPropertyInteger('ThresholdValueSwitchingOff', 5);
         $this->RegisterPropertyInteger('ThresholdValueSwitchingOn', 100);
@@ -330,6 +331,7 @@ class PowerSwitchByMeasurement extends IPSModule
                 if ($archive != 0 && @IPS_ObjectExists($archive)) {
                     $state = $this->ReadPropertyBoolean('UseCurrentConsumptionArchiving');
                     @AC_SetLoggingStatus($archive, $targetID, $state);
+                    @AC_SetAggregationType($archive, $targetID, 0);
                     @IPS_ApplyChanges($archive);
                 }
                 if ($this->ReadPropertyBoolean('EnableCurrentConsumption')) {
@@ -344,6 +346,13 @@ class PowerSwitchByMeasurement extends IPSModule
             $hide = true;
             $targetID = $this->ReadPropertyInteger('EnergyCounter');
             if ($targetID != 0 && @IPS_ObjectExists($targetID)) {
+                $archive = $this->ReadPropertyInteger('Archive');
+                if ($archive != 0 && @IPS_ObjectExists($archive)) {
+                    $state = $this->ReadPropertyBoolean('UseEnergyCounterArchiving');
+                    @AC_SetLoggingStatus($archive, $targetID, $state);
+                    @AC_SetAggregationType($archive, $targetID, 1);
+                    @IPS_ApplyChanges($archive);
+                }
                 if ($this->ReadPropertyBoolean('EnableEnergyCounter')) {
                     $hide = false;
                 }
