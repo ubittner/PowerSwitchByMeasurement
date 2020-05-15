@@ -26,11 +26,11 @@
         },
         {
           "type": "Label",
-          "caption": "Version:\t\t\t1.00-8"
+          "caption": "Version:\t\t\t1.00-9"
         },
         {
           "type": "Label",
-          "caption": "Datum:\t\t\t25. April 2020"
+          "caption": "Datum:\t\t\t15. Mai 2020"
         },
         {
           "type": "Label",
@@ -133,6 +133,46 @@
           "name": "SwitchingActuator",
           "caption": "Schaltaktor",
           "width": "600px"
+        },
+        {
+          "type": "ExpansionPanel",
+          "caption": "Optionen",
+          "items": [
+            {
+              "type": "Select",
+              "name": "ActuatorStatusOff",
+              "caption": "Statusaktualisierung Aus",
+              "options": [
+                {
+                  "caption": "Keine Aktualisierung",
+                  "value": 0
+                },
+                {
+                  "caption": "Aus",
+                  "value": 1
+                }
+              ]
+            },
+            {
+              "type": "Select",
+              "name": "ActuatorStatusOn",
+              "caption": "Statusaktualisierung An",
+              "options": [
+                {
+                  "caption": "Keine Aktualisierung",
+                  "value": 0
+                },
+                {
+                  "caption": "Messung",
+                  "value": 1
+                },
+                {
+                  "caption": "An",
+                  "value": 2
+                }
+              ]
+            }
+          ]
         }
       ]
     },

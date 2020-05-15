@@ -12,9 +12,9 @@
  * @license     CC BY-NC-SA 4.0
  *              https://creativecommons.org/licenses/by-nc-sa/4.0/
  *
- * @version     1.00-8
- * @date        2020-04-25, 18:00, 1587834000
- * @review      2020-04-25, 18:00
+ * @version     1.00-9
+ * @date        2020-05-15, 18:00, 1589562000
+ * @review      2020-05-15, 18:00
  *
  * @see         https://github.com/ubittner/PowerSwitchByMeasurement
  *
@@ -45,6 +45,11 @@ class PowerSwitchByMeasurement extends IPSModule
     // Constants
     private const NOTIFICATION_CENTER_GUID = '{D184C522-507F-BED6-6731-728CE156D659}';
 
+    /**
+     * Creates this instance.
+     *
+     * @return bool|void
+     */
     public function Create()
     {
         // Never delete this line!
@@ -58,8 +63,15 @@ class PowerSwitchByMeasurement extends IPSModule
         // Register timers
         $this->RegisterNotificationTimer();
         $this->RegisterSwitchingOffTimer();
+        // Register attributes
+        $this->RegisterAttributes();
     }
 
+    /**
+     * Applies the cahnges of this instance.
+     *
+     * @return bool|void
+     */
     public function ApplyChanges()
     {
         // Wait until IP-Symcon is started
@@ -79,12 +91,19 @@ class PowerSwitchByMeasurement extends IPSModule
         // Deactivate timers
         $this->DeactivateNotificationTimer();
         $this->DeactivateSwitchingOffTimer();
+        // Reset notification
+        $this->ResetNotification();
         // Check maintenance mode
         $this->CheckMaintenanceMode();
         // Get actuator state
         $this->GetActuatorState();
     }
 
+    /**
+     * Destroys this instance.
+     *
+     * @return bool|void
+     */
     public function Destroy()
     {
         // Never delete this line!
@@ -93,16 +112,19 @@ class PowerSwitchByMeasurement extends IPSModule
         $this->DeleteProfiles();
     }
 
-    private function KernelReady()
-    {
-        $this->ApplyChanges();
-    }
-
+    /**
+     * Reloads the configuration form.
+     */
     public function ReloadConfiguration()
     {
         $this->ReloadForm();
     }
 
+    /**
+     * Gets the configuration form.
+     *
+     * @return false|string
+     */
     public function GetConfigurationForm()
     {
         $formData = json_decode(file_get_contents(__DIR__ . '/form.json'));
@@ -148,8 +170,32 @@ class PowerSwitchByMeasurement extends IPSModule
         return json_encode($formData);
     }
 
+    /**
+     * Creates a script example.
+     */
+    public function CreateScriptExample(): void
+    {
+        $scriptID = IPS_CreateScript(0);
+        IPS_SetName($scriptID, 'Beispielskript (PSBM #' . $this->InstanceID . ')');
+        $scriptContent = "<?php\n\n// Methode:\n// PSBM_SelectSwitchingMode(integer \$InstanceID, integer \$Mode);\n\n### Beispiele:\n\n// Aus:\nPSBM_SelectSwitchingMode(" . $this->InstanceID . ", 0);\n\n// Messung:\nPSBM_SelectSwitchingMode(" . $this->InstanceID . ", 1);\n\n// An:\nPSBM_SelectSwitchingMode(" . $this->InstanceID . ', 2);';
+        IPS_SetScriptContent($scriptID, $scriptContent);
+        IPS_SetParent($scriptID, $this->InstanceID);
+        IPS_SetPosition($scriptID, 100);
+        IPS_SetHidden($scriptID, true);
+        if ($scriptID != 0) {
+            echo 'Beispielskript wurde erfolgreich erstellt!';
+        }
+    }
+
     //#################### Request action
 
+    /**
+     * Requests an action via WebFront.
+     *
+     * @param $Ident
+     * @param $Value
+     * @return bool|void
+     */
     public function RequestAction($Ident, $Value)
     {
         switch ($Ident) {
@@ -162,6 +208,17 @@ class PowerSwitchByMeasurement extends IPSModule
 
     //#################### Private
 
+    /**
+     * Applies the changes if the kernel is ready.
+     */
+    private function KernelReady()
+    {
+        $this->ApplyChanges();
+    }
+
+    /**
+     * Registers the properties.
+     */
     private function RegisterProperties(): void
     {
         // General options
@@ -177,6 +234,8 @@ class PowerSwitchByMeasurement extends IPSModule
         $this->RegisterPropertyBoolean('UseMessageSinkDebug', false);
         // Actuator
         $this->RegisterPropertyInteger('SwitchingActuator', 0);
+        $this->RegisterPropertyInteger('ActuatorStatusOff', 1);
+        $this->RegisterPropertyInteger('ActuatorStatusOn', 2);
         // Consumption
         $this->RegisterPropertyInteger('CurrentConsumption', 0);
         $this->RegisterPropertyInteger('EnergyCounter', 0);
@@ -200,6 +259,9 @@ class PowerSwitchByMeasurement extends IPSModule
         $this->RegisterPropertyInteger('Script', 0);
     }
 
+    /**
+     * Creates the profiles.
+     */
     private function CreateProfiles(): void
     {
         // Switching mode
@@ -239,6 +301,9 @@ class PowerSwitchByMeasurement extends IPSModule
         IPS_SetVariableProfileIcon($profile, 'Electricity');
     }
 
+    /**
+     * Deletes the profiles of this instance.
+     */
     private function DeleteProfiles(): void
     {
         $profiles = ['SwitchingMode', 'MonitoringMode', 'BelowMilliampere', 'AboveMilliampere'];
@@ -250,6 +315,9 @@ class PowerSwitchByMeasurement extends IPSModule
         }
     }
 
+    /**
+     * Registers the variables.
+     */
     private function RegisterVariables(): void
     {
         // Switching mode
@@ -275,6 +343,9 @@ class PowerSwitchByMeasurement extends IPSModule
         IPS_SetIcon($this->GetIDForIdent('NextSwitchOff'), 'Clock');
     }
 
+    /**
+     * Creates links.
+     */
     private function CreateLinks(): void
     {
         // Current consumption
@@ -315,6 +386,9 @@ class PowerSwitchByMeasurement extends IPSModule
         }
     }
 
+    /**
+     * Sets the options.
+     */
     private function SetOptions(): void
     {
         // Switching mode
@@ -371,44 +445,45 @@ class PowerSwitchByMeasurement extends IPSModule
         IPS_SetHidden($this->GetIDForIdent('NextSwitchOff'), !$this->ReadPropertyBoolean('EnableNextSwitchOff'));
     }
 
-    public function CreateScriptExample(): void
-    {
-        $scriptID = IPS_CreateScript(0);
-        IPS_SetName($scriptID, 'Beispielskript (PSBM #' . $this->InstanceID . ')');
-        $scriptContent = "<?php\n\n// Methode:\n// PSBM_SelectSwitchingMode(integer \$InstanceID, integer \$Mode);\n\n### Beispiele:\n\n// Aus:\nPSBM_SelectSwitchingMode(" . $this->InstanceID . ", 0);\n\n// Messung:\nPSBM_SelectSwitchingMode(" . $this->InstanceID . ", 1);\n\n// An:\nPSBM_SelectSwitchingMode(" . $this->InstanceID . ', 2);';
-        IPS_SetScriptContent($scriptID, $scriptContent);
-        IPS_SetParent($scriptID, $this->InstanceID);
-        IPS_SetPosition($scriptID, 100);
-        IPS_SetHidden($scriptID, true);
-        if ($scriptID != 0) {
-            echo 'Beispielskript wurde erfolgreich erstellt!';
-        }
-    }
-
+    /**
+     * Registers the notification timer.
+     */
     private function RegisterNotificationTimer(): void
     {
         $this->RegisterTimer('Notification', 0, 'PSBM_TriggerNotification(' . $this->InstanceID . ');');
     }
 
+    /**
+     * Registers the switching off timer.
+     */
     private function RegisterSwitchingOffTimer(): void
     {
         $this->RegisterTimer('SwitchingOff', 0, 'PSBM_TriggerAutomaticSwitchOff(' . $this->InstanceID . ');');
     }
 
+    /**
+     * Sets the interval of the notification timer.
+     */
     private function SetNotificationTimer(): void
     {
-        // Duration from minutes to seconds
-        $duration = $this->ReadPropertyInteger('NotificationExpirationTime');
-        $durationUnit = $this->ReadPropertyInteger('NotificationExpirationUnit');
-        if ($durationUnit == 1) {
-            $duration = $duration * 60;
+        $notify = $this->ReadAttributeBoolean('SendNotification');
+        if ($notify) {
+            // Duration from minutes to seconds
+            $duration = $this->ReadPropertyInteger('NotificationExpirationTime');
+            $durationUnit = $this->ReadPropertyInteger('NotificationExpirationUnit');
+            if ($durationUnit == 1) {
+                $duration = $duration * 60;
+            }
+            // Set timer interval
+            $this->SetTimerInterval('Notification', $duration * 1000);
+            $timestamp = time() + $duration;
+            $this->SetValue('NextNotification', date('d.m.Y, H:i:s', ($timestamp)));
         }
-        // Set timer interval
-        $this->SetTimerInterval('Notification', $duration * 1000);
-        $timestamp = time() + $duration;
-        $this->SetValue('NextNotification', date('d.m.Y, H:i:s', ($timestamp)));
     }
 
+    /**
+     * Sets the interval for the switching off timer.
+     */
     private function SetSwitchingOffTimer(): void
     {
         // Duration from minutes to seconds
@@ -423,18 +498,48 @@ class PowerSwitchByMeasurement extends IPSModule
         $this->SetValue('NextSwitchOff', date('d.m.Y, H:i:s', ($timestamp)));
     }
 
-    public function DeactivateNotificationTimer(): void
+    /**
+     * Deactivates the notification timer.
+     */
+    private function DeactivateNotificationTimer(): void
     {
         $this->SetTimerInterval('Notification', 0);
         $this->SetValue('NextNotification', '-');
     }
 
-    public function DeactivateSwitchingOffTimer(): void
+    /**
+     * Deactivates the switching off timer.
+     */
+    private function DeactivateSwitchingOffTimer(): void
     {
         $this->SetTimerInterval('SwitchingOff', 0);
         $this->SetValue('NextSwitchOff', '-');
     }
 
+    /**
+     * Registers the attributes.
+     */
+    private function RegisterAttributes(): void
+    {
+        $this->RegisterAttributeBoolean('SendNotification', true);
+    }
+
+    /**
+     * Resets the notification attribute.
+     */
+    private function ResetNotification(): void
+    {
+        $this->SendDebug(__FUNCTION__, 'Attribute: ' . json_encode(true), 0);
+        $this->WriteAttributeBoolean('SendNotification', true);
+    }
+
+    /**
+     * Checks the maintenance mode.
+     *
+     * @return bool
+     * false    = normal mode
+     * true     = maintenance mode
+     */
     private function CheckMaintenanceMode(): bool
     {
         $result = true;

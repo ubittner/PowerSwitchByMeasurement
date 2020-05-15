@@ -5,6 +5,7 @@ declare(strict_types=1);
 
 trait PSBM_messageSink
 {
+
     public function MessageSink($TimeStamp, $SenderID, $Message, $Data)
     {
         if (!$this->CheckMaintenanceMode()) {
@@ -37,7 +38,7 @@ trait PSBM_messageSink
                 // Current consumption
                 if ($SenderID == $this->ReadPropertyInteger('CurrentConsumption')) {
                     if ($Data[1]) {
-                        $scriptText = 'PSBM_TriggerCurrentConsumptionAction(' . $this->InstanceID . ', ' . json_encode(intval($Data[0])) . ');';
+                        $scriptText = 'PSBM_TriggerCurrentConsumptionAction(' . $this->InstanceID . ');';
                         IPS_RunScriptText($scriptText);
                     }
                 }
@@ -48,6 +49,9 @@ trait PSBM_messageSink
 
     //#################### Private
 
+    /**
+     * Unregisters the variables for update from message sink.
+     */
     private function UnregisterMessages(): void
     {
         foreach ($this->GetMessageList() as $id => $registeredMessage) {
@@ -59,6 +63,9 @@ trait PSBM_messageSink
         }
     }
 
+    /**
+     * Registers the variables for message sink.
+     */
     private function RegisterMessages(): void
     {
         // Unregister first

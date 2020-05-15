@@ -6,7 +6,7 @@ declare(strict_types=1);
 trait PSBM_switchingMode
 {
     /**
-     * Selects the power mode.
+     * Selects the switching mode.
      *
      * @param int $Mode
      * 0 = off
@@ -68,6 +68,8 @@ trait PSBM_switchingMode
         }
         // Script
         $this->ExecuteScript($Mode);
+        // Reset notification
+        $this->ResetNotification();
     }
 
     /**
@@ -86,21 +88,54 @@ trait PSBM_switchingMode
         $this->SendDebug(__FUNCTION__, 'Neuer Wert: ' . json_encode($State), 0);
         // Off
         if (!$State) {
-            $this->SetValue('SwitchingMode', 0);
-            $this->DeactivateNotificationTimer();
-            $this->DeactivateSwitchingOffTimer();
-            $this->SetValue('MonitoringMode', false);
-            $this->SendDebug(__FUNCTION__, 'Die Überwachung wurde deaktiviert!', 0);
+            $this->SendDebug(__FUNCTION__, 'Neuer Schaltaktorzustand: Aus', 0);
+            $updateMode = $this->ReadPropertyInteger('ActuatorStatusOff');
+            switch ($updateMode) {
+                // Off
+                case 1:
+                    $this->SetValue('SwitchingMode', 0);
+                    $this->SetValue('MonitoringMode', false);
+                    $this->DeactivateNotificationTimer();
+                    $this->DeactivateSwitchingOffTimer();
+                    $this->ResetNotification();
+                    $this->SendDebug(__FUNCTION__, 'Neuer Schaltzustand: Aus', 0);
+                    break;
+
+                default:
+                    $this->SendDebug(__FUNCTION__, 'Es soll keine Aktualisierung vorgenommen werden.', 0);
+                    return;
+            }
         }
         // On
         if ($State) {
-            // Only if switching mode is off
-            if ($this->GetValue('SwitchingMode') == 0) {
-                $this->SetValue('SwitchingMode', 2);
+            $this->SendDebug(__FUNCTION__, 'Neuer Schaltaktorzustand: An', 0);
+            $updateMode = $this->ReadPropertyInteger('ActuatorStatusOn');
+            switch ($updateMode) {
+                // Measurement
+                case 1:
+                    $switchingMode = 1;
+                    $switchingModeName = 'Messung';
+                    break;
+
+                // On
+                case 2:
+                    $switchingMode = 2;
+                    $switchingModeName = 'An';
+                    break;
+
+                default:
+                    $this->SendDebug(__FUNCTION__, 'Es soll keine Aktualisierung vorgenommen werden.', 0);
+                    return;
+            }
+            if ($this->GetValue('SwitchingMode') == 0) { // Off
+                $this->SendDebug(__FUNCTION__, 'Neuer Schaltzustand: ' . $switchingModeName, 0);
+                $this->SetValue('SwitchingMode', $switchingMode);
+                $this->TriggerCurrentConsumptionAction();
                 $this->DeactivateNotificationTimer();
                 $this->DeactivateSwitchingOffTimer();
-                $this->SetValue('MonitoringMode', false);
-                $this->SendDebug(__FUNCTION__, 'Die Überwachung wurde deaktiviert!', 0);
+                $this->ResetNotification();
+            } else {
+                $this->SendDebug(__FUNCTION__, 'Der Schaltzustand bleibt unverändert.', 0);
             }
         }
     }

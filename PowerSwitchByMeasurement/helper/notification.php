@@ -6,7 +6,7 @@ declare(strict_types=1);
 trait PSBM_notification
 {
     /**
-     * Triggers a notification, normally executed by timer.
+     * Triggers a notification.
      */
     public function TriggerNotification(): void
     {
@@ -40,16 +40,22 @@ trait PSBM_notification
         if (!$this->ValidateNotificationCenter()) {
             return;
         }
-        $id = $this->ReadPropertyInteger('NotificationCenter');
-        $title = substr($this->ReadPropertyString('NotificationTitle'), 0, 32);
-        $text = $this->ReadPropertyString('NotificationText');
-        $pushTitle = $title;
-        $pushText = $text;
-        $emailSubject = $title;
-        $emailText = $text;
-        $smsText = $title . ', ' . $text;
-        $messageType = 0;
-        @BENA_SendNotification($id, $pushTitle, $pushText, $emailSubject, $emailText, $smsText, $messageType);
+        $notify = $this->ReadAttributeBoolean('SendNotification');
+        if ($notify) {
+            $this->SendDebug(__FUNCTION__, 'Die Benachrichtigung wird versendet.', 0);
+            $id = $this->ReadPropertyInteger('NotificationCenter');
+            $title = substr($this->ReadPropertyString('NotificationTitle'), 0, 32);
+            $text = $this->ReadPropertyString('NotificationText');
+            $pushTitle = $title;
+            $pushText = $text;
+            $emailSubject = $title;
+            $emailText = $text;
+            $smsText = $title . ', ' . $text;
+            $messageType = 0;
+            @BENA_SendNotification($id, $pushTitle, $pushText, $emailSubject, $emailText, $smsText, $messageType);
+            $this->WriteAttributeBoolean('SendNotification', false);
+            $this->SendDebug(__FUNCTION__, 'Attribute: ' . json_encode(false), 0);
+        }
     }
 
     /**
