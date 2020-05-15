@@ -12,7 +12,7 @@
  * @license     CC BY-NC-SA 4.0
  *              https://creativecommons.org/licenses/by-nc-sa/4.0/
  *
- * @version     1.00-10
+ * @version     1.00-11
  * @date        2020-05-15, 18:00, 1589562000
  * @review      2020-05-15, 18:00
  *
@@ -234,8 +234,8 @@ class PowerSwitchByMeasurement extends IPSModule
         $this->RegisterPropertyBoolean('UseMessageSinkDebug', false);
         // Actuator
         $this->RegisterPropertyInteger('SwitchingActuator', 0);
-        $this->RegisterPropertyInteger('ActuatorStatusOff', 1);
-        $this->RegisterPropertyInteger('ActuatorStatusOn', 2);
+        $this->RegisterPropertyInteger('ActuatorStatusOff', 0);
+        $this->RegisterPropertyInteger('ActuatorStatusOn', 0);
         // Consumption
         $this->RegisterPropertyInteger('CurrentConsumption', 0);
         $this->RegisterPropertyInteger('EnergyCounter', 0);
