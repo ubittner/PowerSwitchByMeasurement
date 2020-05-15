@@ -5,7 +5,6 @@ declare(strict_types=1);
 
 trait PSBM_messageSink
 {
-
     public function MessageSink($TimeStamp, $SenderID, $Message, $Data)
     {
         if (!$this->CheckMaintenanceMode()) {
